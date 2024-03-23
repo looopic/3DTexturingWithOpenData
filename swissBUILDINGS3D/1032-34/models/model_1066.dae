@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <authoring_tool>FME 2019.1.2.0</authoring_tool>
+    </contributor>
+    <created>2020-05-29T12:43:55+02:00</created>
+    <modified>2020-05-29T12:43:55+02:00</modified>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="e_0">
+      <profile_COMMON>
+        <technique sid="t0">
+          <phong>
+            <diffuse>
+              <color>0.811765 0.247059 0.247059 1</color>
+            </diffuse>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="e_1">
+      <profile_COMMON>
+        <technique sid="t0">
+          <phong>
+            <diffuse>
+              <color>0.886275 0.85098 0.564706 1</color>
+            </diffuse>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="m_0">
+      <instance_effect url="#e_0"/>
+    </material>
+    <material id="m_1">
+      <instance_effect url="#e_1"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="g_0">
+      <mesh>
+        <source id="src_0" name="position">
+          <float_array id="arr_0" count="36">-4.546996168587442 -2.0322314337377954 425.075 -4.2661273563378215 -9.851111924770317 419.545 6.6878414677341755 -8.395769610276018 419.545 -5.290626693750165 -2.1312386969715966 425.075 4.9196953165734465 -0.7759034993779828 425.075 5.663325837575793 -0.6768962210825674 425.075 4.9223515701227205 4.905307261059735 420.761 4.178721056703631 4.8062999834114235 420.761 -5.287970326733119 3.5499720777891812 420.761 -6.031600844552646 3.450964815203827 420.761 4.266114003431779 9.851115203255931 418.549 -6.687822177117678 8.397772578987935 418.549</float_array>
+          <technique_common>
+            <accessor source="#arr_0" stride="3" count="12">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="v_0">
+          <input semantic="POSITION" source="#src_0"/>
+        </vertices>
+        <triangles count="14" material="material0">
+          <input offset="0" semantic="VERTEX" source="#v_0"/>
+          <p>0 1 2 3 1 0 4 2 5 0 2 4 5 6 7 0 7 8 4 7 0 5 7 4 0 8 9 0 9 3 7 10 11 6 10 7 8 11 9 7 11 8</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="g_1">
+      <mesh>
+        <source id="src_3" name="position">
+          <float_array id="arr_1" count="48">-4.2661273563378215 -9.851111924770317 419.545 5.845203652608906 -7.751146377089853 420.078 6.6878414677341755 -8.395769610276018 419.545 -5.290626693750165 -2.1312386969715966 425.075 -3.621504088836745 -9.00847413420193 420.078 5.663325837575793 -0.6768962210825674 425.075 4.178721056703631 4.8062999834114235 420.761 4.9223515701227205 4.905307261059735 420.761 4.9196953165734465 -0.7759034993779828 425.075 3.620507118363412 9.009493356349562 418.881 4.266114003431779 9.851115203255931 418.549 -6.687822177117678 8.397772578987935 418.549 -5.846184189074176 7.75316547058749 418.881 -6.031600844552646 3.450964815203827 420.761 -4.546996168587442 -2.0322314337377954 425.075 -5.287970326733119 3.5499720777891812 420.761</float_array>
+          <technique_common>
+            <accessor source="#arr_1" stride="3" count="16">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="v_1">
+          <input semantic="POSITION" source="#src_3"/>
+        </vertices>
+        <triangles count="16" material="material0">
+          <input offset="0" semantic="VERTEX" source="#v_1"/>
+          <p>0 1 2 3 4 0 0 4 1 2 1 5 5 6 7 1 8 5 8 6 5 7 9 10 6 9 7 10 9 11 11 12 13 9 12 11 13 14 3 12 15 13 15 14 13 14 4 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="g_2">
+      <mesh>
+        <source id="src_6" name="position">
+          <float_array id="arr_2" count="12">5.845203652608906 -7.751146377089853 413.426 -5.846184189074176 7.75316547058749 413.426 3.620507118363412 9.009493356349562 413.426 -3.621504088836745 -9.00847413420193 413.426</float_array>
+          <technique_common>
+            <accessor source="#arr_2" stride="3" count="4">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="v_2">
+          <input semantic="POSITION" source="#src_6"/>
+        </vertices>
+        <triangles count="2" material="material0">
+          <input offset="0" semantic="VERTEX" source="#v_2"/>
+          <p>0 1 2 0 3 1</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="g_3">
+      <mesh>
+        <source id="src_9" name="position">
+          <float_array id="arr_3" count="54">4.178721056703631 4.8062999834114235 420.761 5.845203652608906 -7.751146377089853 420.078 5.845203652608906 -7.751146377089853 413.426 4.9196953165734465 -0.7759034993779828 425.075 3.620507118363412 9.009493356349562 413.426 3.620507118363412 9.009493356349562 418.881 -5.489406025445635 7.8004115960811475 418.553 -5.489406025445635 7.8004115960811475 418.653 -5.846184189074176 7.75316547058749 418.881 -5.846184189074176 7.75316547058749 413.426 -5.846184189074176 7.75316547058749 418.519 -5.846184189074176 7.75316547058749 418.619 -5.176579127678402 2.7061373094335908 418.519 -3.621504088836745 -9.00847413420193 413.426 -3.621504088836745 -9.00847413420193 420.078 -5.176579127678402 2.7061373094335908 418.619 -4.546996168587442 -2.0322314337377954 425.075 -5.287970326733119 3.5499720777891812 420.761</float_array>
+          <technique_common>
+            <accessor source="#arr_3" stride="3" count="18">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="v_3">
+          <input semantic="POSITION" source="#src_9"/>
+        </vertices>
+        <triangles count="20" material="material0">
+          <input offset="0" semantic="VERTEX" source="#v_3"/>
+          <p>0 1 2 3 1 0 0 2 4 0 4 5 6 5 4 7 5 6 8 5 7 6 4 9 6 9 10 8 7 11 12 13 14 9 13 12 15 14 16 12 14 15 15 16 17 15 17 8 15 8 11 9 12 10 2 14 13 1 14 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="vs_0">
+      <node>
+        <node>
+          <instance_geometry url="#g_0">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="material0" target="#m_0">
+                  <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+        <node>
+          <instance_geometry url="#g_1">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="material0" target="#m_0">
+                  <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+        <node>
+          <instance_geometry url="#g_2">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="material0" target="#m_0">
+                  <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+        <node>
+          <instance_geometry url="#g_3">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="material0" target="#m_1">
+                  <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#vs_0"/>
+  </scene>
+</COLLADA>
