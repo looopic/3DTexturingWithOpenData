@@ -54,10 +54,18 @@ bpy.ops.uv.smart_project(angle_limit=66, island_margin=0.02)
 bpy.ops.object.mode_set(mode='OBJECT')
 
 
-# Save the UV layout
+# Export the UV layout
 uv_map_filepath = os.path.join(working_dir, "uv_map.png")
+bpy.ops.object.mode_set(mode='OBJECT')
+bpy.ops.object.select_all(action='DESELECT')
+merged_obj.select_set(True)
+bpy.context.view_layer.objects.active = merged_obj
 bpy.ops.object.mode_set(mode='EDIT')
-bpy.ops.uv.export_layout(filepath=uv_map_filepath, opacity=0, check_existing=False, modified=False)
+bpy.ops.mesh.select_all(action='SELECT')
+bpy.ops.uv.unwrap(method='ANGLE_BASED', margin=0.02)
+bpy.ops.object.mode_set(mode='OBJECT')
+bpy.ops.object.mode_set(mode='EDIT')
+bpy.ops.uv.export_layout(filepath=uv_map_filepath, check_existing=False, modified=False, opacity=0, size=(2048, 2048))
 
 print("UV map saved at:", uv_map_filepath)
 
