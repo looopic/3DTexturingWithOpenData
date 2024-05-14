@@ -2,6 +2,55 @@ import bpy
 import os
 import sys
 
+def join_objects(objects):
+    bpy.ops.object.select_all(action='DESELECT')
+    for obj in objects:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = objects[0]
+    bpy.ops.object.join()
+
+def unwrap():
+    bpy.ops.object.mode_set(mode='EDIT')
+    bpy.ops.mesh.select_all(action='SELECT')
+    bpy.ops.uv.smart_project(angle_limit=66, island_margin=0.02)
+    bpy.ops.object.mode_set(mode='OBJECT')
+
+def save_uv_map(file_path):
+    bpy.ops.object.mode_set(mode='EDIT')
+    bpy.ops.uv.export_layout(filepath=file_path, check_existing=False, mode='PNG')
+    bpy.ops.object.mode_set(mode='OBJECT')
+
+def save_model_blend(obj, file_path):
+    bpy.ops.object.select_all(action='DESELECT')
+    obj.select_set(True)
+    bpy.context.view_layer.objects.active = obj
+    bpy.ops.wm.save_mainfile(filepath=file_path)
+
+def process_collada_file(collada_file):
+    # Load collada file
+    bpy.ops.wm.collada_import(filepath=collada_file)
+    # Get all objects in the scene
+    objects = bpy.context.scene.objects
+    # Filter out objects that are not meshes
+    mesh_objects = [obj for obj in objects if obj.type == 'MESH']
+    # Join all mesh objects into a single mesh
+    join_objects(mesh_objects)
+    # Unwrap the joined mesh
+    unwrap()
+    # Set file path for UV map
+    file_name = os.path.splitext(os.path.basename(collada_file))[0]
+    file_path = os.path.join(os.path.dirname(collada_file), file_name + "_uv_map.png")
+    # Save UV map as PNG
+    save_uv_map(file_path)
+    print("UV map saved at:", file_path)
+    # Set file path for the model with UV map
+    model_blend_file_path = os.path.join(os.path.dirname(collada_file), file_name + "_with_uv_map.blend")
+    # Save model with UV map as Blender file
+    save_model_blend(mesh_objects[0], model_blend_file_path)
+    print("Model with UV map saved as blend file at:", model_blend_file_path)
+    # Quit Blender
+    bpy.ops.wm.quit_blender()
+
 def parse_args():
     args = sys.argv[sys.argv.index("--") + 1:]
     if len(args) != 2:
@@ -14,60 +63,5 @@ model, kml = parse_args()
 working_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(working_dir)
 
-# Start Blender
-bpy.ops.wm.collada_import(filepath=os.path.join("swissBUILDINGS3D", kml, "models", model))
-
-# Select all mesh objects
-bpy.ops.object.select_all(action='DESELECT')
-for obj in bpy.context.scene.objects:
-    if obj.type == 'MESH':
-        obj.select_set(True)
-
-# Combine all selected objects into one
-bpy.context.view_layer.objects.active = bpy.context.selected_objects[0]
-bpy.ops.object.join()
-
-# Get the merged mesh
-merged_obj = bpy.context.selected_objects[0]
-
-# Get the Z coordinate of the lowest point of the walls
-lowest_z = min([v.co.z for v in merged_obj.data.vertices])
-
-# Select vertices belonging to the floor
-bpy.context.view_layer.objects.active = merged_obj
-bpy.ops.object.mode_set(mode='EDIT')
-bpy.ops.mesh.select_all(action='DESELECT')
-
-for vert in merged_obj.data.vertices:
-    if vert.co.z <= lowest_z:
-        vert.select = True
-
-# Invert selection to exclude the floor from UV unwrapping
-bpy.ops.mesh.select_all(action='INVERT')
-
-# Unwrap UV for the merged mesh
-bpy.ops.object.mode_set(mode='OBJECT')
-bpy.context.view_layer.objects.active = merged_obj
-bpy.ops.object.mode_set(mode='EDIT')
-bpy.ops.mesh.select_all(action='SELECT')
-bpy.ops.uv.smart_project(angle_limit=66, island_margin=0.02)
-bpy.ops.object.mode_set(mode='OBJECT')
-
-
-# Export the UV layout
-uv_map_filepath = os.path.join(working_dir, "uv_map.png")
-bpy.ops.object.mode_set(mode='OBJECT')
-bpy.ops.object.select_all(action='DESELECT')
-merged_obj.select_set(True)
-bpy.context.view_layer.objects.active = merged_obj
-bpy.ops.object.mode_set(mode='EDIT')
-bpy.ops.mesh.select_all(action='SELECT')
-bpy.ops.uv.unwrap(method='ANGLE_BASED', margin=0.02)
-bpy.ops.object.mode_set(mode='OBJECT')
-bpy.ops.object.mode_set(mode='EDIT')
-bpy.ops.uv.export_layout(filepath=uv_map_filepath, check_existing=False, modified=False, opacity=0, size=(2048, 2048))
-
-print("UV map saved at:", uv_map_filepath)
-
-# Quit Blender
-bpy.ops.wm.quit_blender()
+collada_file = os.path.join("swissBUILDINGS3D", kml, "models", model)
+process_collada_file(collada_file)
