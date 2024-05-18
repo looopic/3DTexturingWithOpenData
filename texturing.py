@@ -21,6 +21,7 @@ def assign_texture(obj, texture_image):
     mat.node_tree.links.new(bsdf.inputs['Base Color'], tex_node.outputs['Color'])
     
     # Assign the material to the object
+    obj.data.materials.clear()
     if obj.data.materials:
         obj.data.materials[0] = mat
     else:
@@ -29,7 +30,7 @@ def assign_texture(obj, texture_image):
 def parse_args():
     args = sys.argv[sys.argv.index("--") + 1:]
     if len(args) != 2:
-        print("Usage: blender -P your_script.py -- <model_file> <kml_file>")
+        print("Usage: blender -P texturing.py -- <model_file> <kml_file>")
         sys.exit(1)
     return args
 
